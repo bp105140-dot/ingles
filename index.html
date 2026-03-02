@@ -1,6 +1,6 @@
  (cd "$(git rev-parse --show-toplevel)" && git apply --3way <<'EOF' 
 diff --git a/index.html b/index.html
-index a32656c201b2146e54b925d85a531d2af2a787a6..bf018cc29638041b866399b6e5119cec45c8f6d2 100644
+index a32656c201b2146e54b925d85a531d2af2a787a6..55777a524a3cdf9be341e33424c611ace966343d 100644
 --- a/index.html
 +++ b/index.html
 @@ -1,31 +1,36 @@
@@ -106,8 +106,7 @@ index a32656c201b2146e54b925d85a531d2af2a787a6..bf018cc29638041b866399b6e5119cec
    font-family:'Syne',sans-serif;font-weight:800;font-size:20px;
    display:flex;align-items:center;gap:8px;cursor:pointer;
    color:var(--text);transition:color .2s;
-@@ -132,50 +152,58 @@ svg{display:block}
- .tb-btn:hover{background:var(--border);transform:scale(1.07)}
+@@ -133,137 +153,144 @@ svg{display:block}
  
  /* PAGES CONTAINER */
  #pages{
@@ -132,40 +131,200 @@ index a32656c201b2146e54b925d85a531d2af2a787a6..bf018cc29638041b866399b6e5119cec
    pointer-events:none;
  }
  
-+.home-footnote{
-+  margin-top:14px;
-+  color:var(--text3);
-+  font-size:12px;
-+  font-weight:700;
-+  text-align:center;
-+}
-+
  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    HOME PAGE
+-   HOME PAGE
++   HOME PAGE (REVAMP)
  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
  #pg-home{overflow-y:auto}
  
  .home-hero{
-   padding:40px 24px 52px;
-   background:linear-gradient(145deg,#1a3c8f 0%,#2563d1 45%,#4F9CF9 100%);
+-  padding:40px 24px 52px;
+-  background:linear-gradient(145deg,#1a3c8f 0%,#2563d1 45%,#4F9CF9 100%);
++  padding:44px 24px 54px;
++  background:
++    radial-gradient(circle at 10% 10%, rgba(255,255,255,.22), transparent 34%),
++    radial-gradient(circle at 95% 85%, rgba(255,255,255,.14), transparent 30%),
++    linear-gradient(140deg,#172554 0%,#1d4ed8 42%,#4F9CF9 100%);
    position:relative;overflow:hidden;
  }
- .home-hero::before{
-   content:'';position:absolute;inset:0;
-   background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
- }
- .hero-inner{position:relative;max-width:1100px;margin:0 auto;}
- .hero-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:28px;}
+-.home-hero::before{
+-  content:'';position:absolute;inset:0;
+-  background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+-}
+-.hero-inner{position:relative;max-width:1100px;margin:0 auto;}
+-.hero-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:28px;}
++.home-hero::before,
++.home-hero::after{content:'';position:absolute;border-radius:999px;filter:blur(2px);pointer-events:none;}
++.home-hero::before{width:280px;height:280px;right:-80px;top:-120px;background:rgba(255,255,255,.12)}
++.home-hero::after{width:240px;height:240px;left:-100px;bottom:-100px;background:rgba(6,182,212,.22)}
++
++.hero-inner{position:relative;max-width:1100px;margin:0 auto;z-index:2;}
++.hero-top{display:grid;grid-template-columns:1.2fr .8fr;gap:18px;align-items:stretch;margin-bottom:24px;}
  .hero-head h1{
-   font-family:'Syne',sans-serif;font-weight:800;font-size:36px;
-   color:#fff;line-height:1.1;margin-bottom:6px;
+-  font-family:'Syne',sans-serif;font-weight:800;font-size:36px;
+-  color:#fff;line-height:1.1;margin-bottom:6px;
+-}
+-.hero-head p{font-size:15px;color:rgba(255,255,255,.75);font-weight:600;}
+-.hero-stat-cards{display:flex;gap:10px;flex-wrap:wrap;}
+-.hsc{
+-  background:rgba(255,255,255,.12);
+-  border:1px solid rgba(255,255,255,.2);
+-  backdrop-filter:blur(8px);
+-  border-radius:var(--r-sm);padding:14px 18px;
+-  min-width:90px;
++  font-family:'Syne',sans-serif;font-weight:800;font-size:42px;
++  color:#fff;line-height:1.05;margin-bottom:10px;
++}
++.hero-head p{font-size:15px;color:rgba(255,255,255,.82);font-weight:700;max-width:550px;}
++.hero-cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;}
++.hero-btn{
++  padding:10px 14px;border-radius:12px;font-size:13px;font-weight:800;
++  border:1px solid rgba(255,255,255,.3);color:#fff;background:rgba(255,255,255,.14);
++}
++.hero-btn.primary{background:#fff;color:#1e3a8a;border-color:#fff}
++.hero-btn:hover{transform:translateY(-2px)}
++
++.hero-panel{
++  background:rgba(255,255,255,.1);
++  border:1px solid rgba(255,255,255,.28);
++  border-radius:18px;padding:16px;
++  backdrop-filter:blur(10px);
  }
- .hero-head p{font-size:15px;color:rgba(255,255,255,.75);font-weight:600;}
- .hero-stat-cards{display:flex;gap:10px;flex-wrap:wrap;}
- .hsc{
-   background:rgba(255,255,255,.12);
-   border:1px solid rgba(255,255,255,.2);
-@@ -469,161 +497,172 @@ svg{display:block}
++.hero-stat-cards{display:grid;grid-template-columns:repeat(2,minmax(110px,1fr));gap:10px;}
++.hsc{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.24);border-radius:14px;padding:12px 14px;}
+ .hsc-n{font-family:'Syne',sans-serif;font-weight:800;font-size:26px;color:#fff;line-height:1;}
+-.hsc-l{font-size:11px;color:rgba(255,255,255,.65);font-weight:700;text-transform:uppercase;letter-spacing:.6px;margin-top:2px;}
++.hsc-l{font-size:11px;color:rgba(255,255,255,.72);font-weight:700;text-transform:uppercase;letter-spacing:.7px;margin-top:3px;}
+ 
+-.home-body{max-width:1100px;margin:0 auto;padding:32px 24px 60px;}
+-.section-label{
+-  font-family:'Syne',sans-serif;font-weight:700;font-size:13px;
+-  text-transform:uppercase;letter-spacing:1.2px;
+-  color:var(--text3);margin-bottom:16px;
++.home-body{max-width:1100px;margin:0 auto;padding:28px 24px 60px;}
++.mods-toolbar{
++  display:flex;gap:10px;flex-wrap:wrap;align-items:center;
++  background:var(--surf);border:1px solid var(--border);border-radius:14px;
++  padding:10px 12px;margin-bottom:16px;box-shadow:var(--sh);
+ }
+-.mods-grid{
+-  display:grid;
+-  grid-template-columns:repeat(auto-fill,minmax(290px,1fr));
+-  gap:14px;
++.chip-btn{
++  padding:8px 12px;border:1px solid var(--border);border-radius:999px;
++  background:var(--surf2);font-size:12px;font-weight:800;color:var(--text2);
++}
++.chip-btn.active{background:var(--brand);border-color:var(--brand);color:#fff}
++.toolbar-right{margin-left:auto;display:flex;gap:8px;align-items:center;}
++.toolbar-right label{font-size:12px;color:var(--text2);font-weight:700;}
++#sort-select{
++  border:1px solid var(--border);background:var(--surf2);color:var(--text);
++  padding:8px 10px;border-radius:10px;font-weight:700;
+ }
+ 
+-/* Module card */
++.section-label{font-family:'Syne',sans-serif;font-weight:800;font-size:13px;text-transform:uppercase;letter-spacing:1.2px;color:var(--text3);margin-bottom:10px;}
++.mods-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px;}
++
+ .mod-card{
+-  background:var(--surf);
++  background:linear-gradient(180deg,var(--surf),color-mix(in srgb,var(--surf) 88%, var(--c) 12%));
+   border:1px solid var(--border);
+-  border-radius:var(--r);
++  border-radius:20px;
+   padding:20px;
+   cursor:pointer;
+   box-shadow:var(--sh);
+   transition:transform .22s,box-shadow .22s,border-color .22s;
+   position:relative;overflow:hidden;
+-  display:flex;gap:16px;align-items:flex-start;
+-}
+-.mod-card:hover{transform:translateY(-4px);box-shadow:var(--sh-lg)}
+-.mod-card:hover{border-color:var(--c,var(--brand))}
+-.mod-card:active{transform:translateY(-1px)}
+-/* accent stripe */
+-.mod-card::after{
+-  content:'';position:absolute;top:0;left:0;width:3px;height:100%;
+-  background:var(--c);border-radius:2px 0 0 2px;
+-  transition:width .2s;
++  display:flex;gap:16px;align-items:flex-start;text-align:left;
+ }
+-.mod-card:hover::after{width:4px}
++.mod-card:hover{transform:translateY(-6px);box-shadow:var(--sh-lg);border-color:var(--c,var(--brand));}
++.mod-card:active{transform:translateY(-2px)}
++.mod-card::after{content:'';position:absolute;inset:auto -40px -40px auto;width:120px;height:120px;border-radius:50%;background:color-mix(in srgb,var(--c) 18%, transparent);}
+ 
+-/* SVG progress ring */
+ .mod-ring-wrap{flex-shrink:0;position:relative;width:56px;height:56px;}
+-.mod-ring-wrap .emoji{
+-  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+-  font-size:22px;
+-}
++.mod-ring-wrap .emoji{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:22px;}
+ .ring-svg{transform:rotate(-90deg)}
+ .ring-bg{fill:none;stroke:var(--border);stroke-width:3}
+-.ring-fg{fill:none;stroke-width:3;stroke-linecap:round;stroke:var(--c);
+-  transition:stroke-dashoffset .7s cubic-bezier(.4,0,.2,1);}
++.ring-fg{fill:none;stroke-width:3;stroke-linecap:round;stroke:var(--c);transition:stroke-dashoffset .7s cubic-bezier(.4,0,.2,1);}
+ 
+ .mod-info{flex:1;min-width:0;}
+-.mod-title{font-family:'Syne',sans-serif;font-weight:800;font-size:16px;color:var(--text);margin-bottom:2px;}
+-.mod-sub{font-size:12px;color:var(--text2);font-weight:600;margin-bottom:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+-.mod-meta{display:flex;align-items:center;gap:8px;}
+-.mod-badge{
+-  padding:3px 10px;border-radius:50px;
+-  font-size:11px;font-weight:800;
+-  background:var(--brand-dim);color:var(--brand);
+-}
+-.mod-pct{font-size:11px;font-weight:700;color:var(--text3);}
++.mod-title{font-family:'Syne',sans-serif;font-weight:800;font-size:17px;color:var(--text);margin-bottom:4px;}
++.mod-sub{font-size:12px;color:var(--text2);font-weight:700;margin-bottom:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
++.mod-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
++.mod-badge{padding:4px 10px;border-radius:999px;font-size:11px;font-weight:900;background:var(--brand-dim);color:var(--brand);}
++.mod-pct{font-size:11px;font-weight:800;color:var(--text3);}
++.mod-level{font-size:10px;padding:4px 8px;border-radius:999px;background:var(--surf2);border:1px solid var(--border);color:var(--text2);font-weight:800;}
++
++.home-footnote{margin-top:16px;color:var(--text3);font-size:12px;font-weight:700;text-align:center;}
+ 
+ /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    QUIZ PAGE — fixed header + sticky footer
+ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+ #pg-quiz{overflow:hidden}
+ 
+ /* Quiz top strip */
+ .qz-strip{
+   flex-shrink:0;background:var(--surf);
+   border-bottom:1px solid var(--border);
+   padding:12px 20px 0;
+   transition:background .35s,border-color .35s;
+ }
+ .qz-strip-row{display:flex;align-items:center;gap:12px;padding-bottom:12px;}
+ .back-btn{
+   width:36px;height:36px;border-radius:10px;
+   background:var(--surf2);border:1px solid var(--border);
+   display:flex;align-items:center;justify-content:center;
+   font-size:16px;color:var(--text);transition:all .18s;flex-shrink:0;
+ }
+ .back-btn:hover{background:var(--border)}
+ .qz-module-name{
+   flex:1;font-family:'Syne',sans-serif;font-weight:800;
+   font-size:15px;color:var(--text);
+   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+@@ -456,174 +483,200 @@ svg{display:block}
+ 
+ /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    CONFETTI
+ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+ #cvc{position:fixed;inset:0;pointer-events:none;z-index:999}
+ .floatie{
+   position:fixed;font-size:38px;pointer-events:none;z-index:998;
+   animation:floatUp 2s ease forwards;
+ }
+ 
+ /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    ANIMATIONS
+ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
  @keyframes fadeIn    {from{opacity:0}to{opacity:1}}
  @keyframes cardIn    {from{opacity:0;transform:scale(.7) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
  @keyframes mascotBob {0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
@@ -178,9 +337,15 @@ index a32656c201b2146e54b925d85a531d2af2a787a6..bf018cc29638041b866399b6e5119cec
     RESPONSIVE
  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
  @media(max-width:560px){
-   .home-hero{padding:28px 18px 40px}
-   .hero-head h1{font-size:26px}
-   .home-body{padding:24px 18px 60px}
+-  .home-hero{padding:28px 18px 40px}
+-  .hero-head h1{font-size:26px}
+-  .home-body{padding:24px 18px 60px}
++  .home-hero{padding:30px 18px 40px}
++  .hero-top{grid-template-columns:1fr}
++  .hero-head h1{font-size:30px}
++  .home-body{padding:20px 18px 56px}
++  .mods-toolbar{padding:10px}
++  .toolbar-right{margin-left:0;width:100%;justify-content:space-between}
    .mods-grid{grid-template-columns:1fr}
    .mod-card{padding:16px}
    .q-text{font-size:19px}
@@ -229,31 +394,59 @@ index a32656c201b2146e54b925d85a531d2af2a787a6..bf018cc29638041b866399b6e5119cec
          <div class="hero-inner">
            <div class="hero-top">
              <div class="hero-head">
-               <h1>Bora aprender<br>inglês! 🎓</h1>
-               <p>Exercícios interativos para você evoluir rápido</p>
+-              <h1>Bora aprender<br>inglês! 🎓</h1>
+-              <p>Exercícios interativos para você evoluir rápido</p>
+-            </div>
+-            <div class="hero-stat-cards">
+-              <div class="hsc">
+-                <div class="hsc-n">9</div>
+-                <div class="hsc-l">Módulos</div>
+-              </div>
+-              <div class="hsc">
+-                <div class="hsc-n">300+</div>
+-                <div class="hsc-l">Exercícios</div>
+-              </div>
+-              <div class="hsc">
+-                <div class="hsc-n" id="h-done">0</div>
+-                <div class="hsc-l">Completos</div>
++              <h1>Aprenda inglês com<br>experiência de produto real ✨</h1>
++              <p>Treine com módulos inteligentes, acompanhe sua evolução e mantenha consistência diária com uma interface premium.</p>
++              <div class="hero-cta">
++                <button class="hero-btn primary" type="button" onclick="scrollToModules()">Começar agora</button>
++                <button class="hero-btn" type="button" onclick="startNextModule()">Continuar do último</button>
+               </div>
              </div>
-             <div class="hero-stat-cards">
-               <div class="hsc">
-                 <div class="hsc-n">9</div>
-                 <div class="hsc-l">Módulos</div>
-               </div>
-               <div class="hsc">
-                 <div class="hsc-n">300+</div>
-                 <div class="hsc-l">Exercícios</div>
-               </div>
-               <div class="hsc">
-                 <div class="hsc-n" id="h-done">0</div>
-                 <div class="hsc-l">Completos</div>
-               </div>
-             </div>
++            <aside class="hero-panel">
++              <div class="hero-stat-cards">
++                <div class="hsc"><div class="hsc-n" id="h-total">9</div><div class="hsc-l">Módulos</div></div>
++                <div class="hsc"><div class="hsc-n" id="h-ex">0</div><div class="hsc-l">Questões</div></div>
++                <div class="hsc"><div class="hsc-n" id="h-done">0</div><div class="hsc-l">Concluídos</div></div>
++                <div class="hsc"><div class="hsc-n" id="h-rate">0%</div><div class="hsc-l">Progresso</div></div>
++              </div>
++            </aside>
            </div>
          </div>
        </div>
  
        <div class="home-body">
-         <div class="section-label">Escolha um módulo</div>
+-        <div class="section-label">Escolha um módulo</div>
++        <div class="section-label">Trilha de aprendizado</div>
++        <div class="mods-toolbar" id="mods-toolbar">
++          <button class="chip-btn active" type="button" data-filter="all">Todos</button>
++          <button class="chip-btn" type="button" data-filter="new">Não iniciados</button>
++          <button class="chip-btn" type="button" data-filter="started">Em andamento</button>
++          <button class="chip-btn" type="button" data-filter="done">Concluídos</button>
++          <div class="toolbar-right">
++            <label for="sort-select">Ordenar</label>
++            <select id="sort-select" aria-label="Ordenar módulos">
++              <option value="default">Ordem do curso</option>
++              <option value="progress">Maior progresso</option>
++              <option value="questions">Mais questões</option>
++            </select>
++          </div>
++        </div>
          <div class="mods-grid" id="mods-grid"></div>
-+        <p class="home-footnote">Dica profissional: use <strong>T</strong> para alternar tema e <strong>H</strong> para voltar ao início.</p>
++        <p class="home-footnote">Atalhos: <strong>T</strong> alterna tema, <strong>H</strong> volta ao início.</p>
        </div>
      </div><!-- /home -->
  
@@ -344,7 +537,53 @@ index a32656c201b2146e54b925d85a531d2af2a787a6..bf018cc29638041b866399b6e5119cec
     DARK MODE
  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
  let dark=false;
-@@ -686,53 +725,55 @@ function nav(to,data){
+@@ -655,117 +708,176 @@ const MODS=[
+   {id:'m5',title:'Auxiliares',sub:'WILL / CAN / DO / DID / WOULD',emoji:'⚙️',color:'#F59E0B',
+    qs:(()=>{const opts=['will','can','do','did','would'];const d=[['Onde você irá hoje? (futuro)','will'],['Você pode me ajudar agora? (poder)','can'],['Onde você mora? (presente)','do'],['Por que você fez isso ontem? (passado)','did'],['Onde você gostaria de morar? (RIA)','would'],['Você vai viajar amanhã? (futuro)','will'],['Você pode falar inglês? (poder)','can'],['Onde você trabalha atualmente? (presente)','do'],['O que você comeu ontem? (passado)','did'],['Você iria comigo se pudesse? (RIA)','would'],['Quando você vai chegar? (futuro)','will'],['Você pode entrar aqui? (poder)','can'],['Onde você estuda? (presente)','do'],['Por que você faltou ontem? (passado)','did'],['O que você faria nessa situação? (RIA)','would'],['Você vai ligar mais tarde? (futuro)','will'],['Você pode dirigir? (poder)','can'],['Onde você compra suas roupas? (presente)','do'],['Quando você terminou o trabalho? (passado)','did'],['Você gostaria de um café? (RIA)','would'],['Você vai sair hoje à noite? (futuro)','will'],['Você pode repetir, por favor? (poder)','can'],['Onde você aprende inglês? (presente)','do'],['Por que você disse isso? (passado)','did'],['O que você faria se tivesse mais tempo? (RIA)','would'],['Você vai estudar hoje? (futuro)','will'],['Você pode me ouvir bem? (poder)','can'],['Onde você mora agora? (presente)','do'],['O que você comprou ontem? (passado)','did'],['Você gostaria de viajar comigo? (RIA)','would']];return d.map(([q,a])=>({q,type:'mc',opts,ans:a}));})()},
+ 
+   {id:'m6',title:'WH + To Be',sub:'Montagem de perguntas',emoji:'🧩',color:'#EC4899',
+    qs:(()=>{const all=['What is','Where are','Why is','When is','Who is','Why are','Where is','What are','When are','Who are'];const d=[['___ ___ your name? (qual é)','What is'],['___ ___ you from? (de onde é)','Where are'],['___ ___ she angry? (por que está)','Why is'],['___ ___ they at home? (onde estão)','Where are'],['___ ___ he tired? (por que está)','Why is'],['___ ___ your birthday? (quando é)','When is'],['___ ___ we late? (por que estamos)','Why are'],['___ ___ your boss? (quem é)','Who is'],['___ ___ you nervous? (por que está)','Why are'],['___ ___ they ready? (por que estão)','Why are'],['___ ___ it broken? (por que está)','Why is'],['___ ___ your keys? (onde estão)','Where are'],['___ ___ your brother? (quem é)','Who is'],['___ ___ you happy now? (por que está)','Why are'],['___ ___ the problem? (qual é)','What is'],['___ ___ she? (quem é)','Who is'],['___ ___ the school? (onde fica)','Where is'],['___ ___ she sad? (por que está)','Why is'],['___ ___ he? (quem é)','Who is'],['___ ___ we today? (onde estamos)','Where are']];return d.map(([q,a])=>{const wr=all.filter(c=>c!==a);return{q,type:'mc',opts:shuffle([a,...pick(wr,3)]),ans:a};});})()},
+ 
+   {id:'m7',title:'WH + Auxiliar + Verbo',sub:'Frases completas em inglês',emoji:'💬',color:'#06B6D4',
+    qs:(()=>{const d=[['Onde você trabalha?','Where do you work?',['Why do you work?','Where did you work?','Where will you work?']],['Por que você estuda inglês?','Why do you study English?',['Where do you study?','Why did you study?','What do you study?']],['Quando você chegou ontem?','When did you arrive yesterday?',['Where did you arrive?','When do you arrive?','Why did you arrive?']],['Onde ela mora?','Where does she live?',['Why does she live?','Where did she live?','Where will she live?']],['O que você vai fazer amanhã?','What will you do tomorrow?',['Where will you do?','What did you do?','What do you do?']],['Por que eles saíram cedo?','Why did they leave early?',['When did they leave?','Why do they leave?','Where did they leave?']],['Onde nós estudamos?','Where do we study?',['Why do we study?','Where did we study?','When do we study?']],['Quando ele vai viajar?','When will he travel?',['Where will he travel?','Why will he travel?','When did he travel?']],['Por que você comprou isso?','Why did you buy this?',['What did you buy?','Why do you buy?','When did you buy?']],['Onde eles vão morar?','Where will they live?',['Why will they live?','Where do they live?','Where did they live?']],['Quem você encontrou ontem?','Who did you meet yesterday?',['When did you meet?','Where did you meet?','Who do you meet?']],['Quando você termina o trabalho?','When do you finish work?',['Why do you finish?','When did you finish?','Where do you finish?']],['Onde ele estudou?','Where did he study?',['Why did he study?','Where does he study?','When did he study?']],['Por que você vai sair cedo?','Why will you leave early?',['When will you leave?','Why did you leave?','Where will you leave?']],['Quando eles chegaram?','When did they arrive?',['Where did they arrive?','Why did they arrive?','When will they arrive?']],['Onde você compra suas roupas?','Where do you buy your clothes?',['Why do you buy?','Where did you buy?','When do you buy?']],['Por que ela estuda inglês?','Why does she study English?',['Where does she study?','Why did she study?','What does she study?']],['Quando nós vamos viajar?','When will we travel?',['Where will we travel?','Why will we travel?','When do we travel?']],['Onde você deixou isso?','Where did you leave this?',['When did you leave?','Why did you leave?','Where do you leave?']],['Por que ele comprou esse carro?','Why did he buy this car?',['When did he buy?','Where did he buy?','Why does he buy?']],['Quando você começa a trabalhar?','When do you start working?',['Where do you start?','Why do you start?','When did you start?']],['Onde eles estudam?','Where do they study?',['Why do they study?','When do they study?','Where did they study?']],['Por que você chamou ela?','Why did you call her?',['When did you call?','Where did you call?','Why do you call?']],['Quando ele terminou o curso?','When did he finish the course?',['Why did he finish?','Where did he finish?','When does he finish?']],['Onde vocês moram agora?','Where do you live now?',['Why do you live here?','Where did you live?','When do you live?']],['Por que eles escolheram isso?','Why did they choose this?',['What did they choose?','When did they choose?','Why do they choose?']],['Quando você aprende inglês?','When do you learn English?',['Where do you learn?','Why do you learn?','When did you learn?']],['Onde ele trabalha agora?','Where does he work now?',['Why does he work?','Where did he work?','When does he work?']],['Por que você mudou de ideia?','Why did you change your mind?',['When did you change?','Where did you change?','Why do you change?']],['Quando eles vão chegar?','When will they arrive?',['Where will they arrive?','Why will they arrive?','When did they arrive?']]];return d.map(([q,a,wr])=>({q,type:'mc',opts:shuffle([a,...wr]),ans:a}));})()},
+ 
+   {id:'m8',title:'PTB no Passado',sub:'WAS / WERE — Traduza para inglês',emoji:'⏪',color:'#EF4444',
+    qs:(()=>{const d=[['Onde eu estava ontem?','Where was I yesterday?'],['Eu estava cansado depois da aula?','Was I tired after class?'],['Onde nós estávamos na sexta-feira?','Where were we on Friday?'],['Nós estávamos prontos para a prova?','Were we ready for the test?'],['Onde você estava ontem à noite?','Where were you last night?'],['Você estava em casa de manhã?','Were you at home in the morning?'],['Ela estava feliz com o resultado?','Was she happy with the result?'],['Onde ela estava no fim de semana?','Where was she on the weekend?'],['Ele estava atrasado para o trabalho?','Was he late for work?'],['Por que ele estava nervoso?','Why was he nervous?'],['Onde nós estávamos ontem à noite?','Where were we last night?'],['Nós estávamos no lugar certo?','Were we in the right place?'],['Onde eles estavam ontem?','Where were they yesterday?'],['Eles estavam na festa?','Were they at the party?'],['Onde eu estava quando a aula começou?','Where was I when class started?'],['Eu estava errado?','Was I wrong?'],['Como foi o filme?','How was the movie?'],['O filme era interessante?','Was the movie interesting?'],['Onde nós estávamos quando choveu?','Where were we when it rained?'],['Por que nós estávamos tão cansados?','Why were we so tired?'],['Onde você estava de manhã?','Where were you in the morning?'],['Você estava animado com a viagem?','Were you excited about the trip?'],['Quem estava com ela na festa?','Who was with her at the party?'],['Ela estava sozinha em casa?','Was she alone at home?'],['Onde eu estava na sexta-feira à noite?','Where was I on Friday night?'],['Eu estava com medo?','Was I scared?'],['Onde eles estavam durante a aula?','Where were they during class?'],['Eles estavam prestando atenção?','Were they paying attention?'],['Quando nós estávamos em casa?','When were we at home?'],['Nós estávamos assistindo TV?','Were we watching TV?'],['Onde ele estava ontem à tarde?','Where was he yesterday afternoon?'],['Ele estava doente ontem?','Was he sick yesterday?'],['Onde eu estava quando você ligou?','Where was I when you called?'],['Eu estava ocupado?','Was I busy?'],['Onde estavam os alunos?','Where were the students?'],['Os alunos estavam prontos para o teste?','Were the students ready for the test?'],['Onde nós estávamos no ano passado?','Where were we last year?'],['Nós estávamos felizes com a notícia?','Were we happy with the news?'],['Onde você estava no fim de semana?','Where were you on the weekend?'],['Você estava cansado ontem?','Were you tired yesterday?'],['Por que ela estava triste?','Why was she sad?'],['Ela estava preocupada com o resultado?','Was she worried about the result?'],['Onde eu estava antes da aula?','Where was I before class?'],['Eu estava atrasado?','Was I late?'],['Onde eles estavam à noite?','Where were they at night?'],['Eles estavam com os amigos?','Were they with their friends?'],['Onde nós estávamos quando tudo começou?','Where were we when everything started?'],['Nós estávamos preparados?','Were we prepared?'],['Onde ele estava ontem à noite?','Where was he last night?'],['Ele estava no trabalho ontem?','Was he at work yesterday?']];return d.map(([q,a])=>({q,type:'fill',ans:a}));})()},
+ 
+   {id:'m9',title:'How Many / Much / Long / Often',sub:'Quantidade & Frequência',emoji:'🔢',color:'#10B981',
+    qs:(()=>{const opts=['How many','How much','How long','How often'];const d=[['Quantas pessoas estão aqui?','How many'],['Quanto dinheiro você tem?','How much'],['Quanto tempo dura o filme?','How long'],['Com que frequência você estuda inglês?','How often'],['Quantos alunos estão na sala?','How many'],['Quanta água tem na garrafa?','How much'],['Quanto tempo dura a aula?','How long'],['Com que frequência você pode vir aqui?','How often'],['Quantos carros estão no estacionamento?','How many'],['Quanto tempo nós temos?','How long'],['Quanto tempo a viagem vai levar?','How long'],['Com que frequência você vai viajar?','How often'],['Quantos dias o curso vai durar?','How many'],['Quanto dinheiro você vai gastar?','How much'],['Quanto tempo vai levar para terminar?','How long'],['Quantos livros você comprou?','How many'],['Quanto café você bebeu?','How much'],['Quanto tempo durou a reunião?','How long'],['Com que frequência você foi lá?','How often'],['Quantas pessoas ela convidou?','How many'],['Quanta ajuda você pode me dar?','How much'],['Quanto tempo você pode ficar aqui?','How long'],['Com que frequência nós podemos nos encontrar?','How often'],['Quantas perguntas você pode responder?','How many'],['Quanta água eu posso beber?','How much'],['Quantos alunos viriam?','How many'],['Quanto dinheiro você precisaria?','How much'],['Quanto tempo a viagem seria?','How long'],['Com que frequência você os visitaria?','How often'],['Quantos dias isso levaria?','How many'],['Quanto tempo você trabalha por dia?','How long'],['Com que frequência ela te liga?','How often'],['Quantas horas você dorme?','How many'],['Quanto açúcar você quer?','How much'],['Quanto tempo dura o jogo?','How long'],['Com que frequência são as aulas?','How often'],['Quantas pessoas você conhece aqui?','How many'],['Quanta lição de casa você tem?','How much'],['Quanto tempo é o intervalo?','How long'],['Com que frequência você pode estudar à noite?','How often'],['Quantos e-mails você enviou ontem?','How many'],['Quanto tempo você passou lá?','How long'],['Quanto tempo levou para cozinhar arroz?','How long'],['Com que frequência ele te ligou no mês passado?','How often'],['Quantos filmes você assistiu?','How many'],['Quanto dinheiro ela economizaria?','How much'],['Quanto tempo você esperaria na fila?','How long'],['Com que frequência eles vão treinar?','How often'],['Quantos dias nós vamos ficar?','How many'],['Quanta água nós podemos comprar?','How much']];return d.map(([q,a])=>({q,type:'mc',opts,ans:a}));})()},
+ ];
+ 
+ /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    SAVED STATE
+ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+ let saved={};
+ try{saved=JSON.parse(localStorage.getItem('eq4')||'{}');}catch(e){}
+ function persist(){try{localStorage.setItem('eq4',JSON.stringify(saved));}catch(e){}}
+ function totalPts(){return Object.values(saved).reduce((t,v)=>t+(v.score||0),0);}
+ function syncPts(){$('g-pts').textContent=totalPts();}
+ 
++let homeFilter='all';
++let homeSort='default';
++
++function moduleStatus(pct){
++  if(pct>=100)return 'done';
++  if(pct>0)return 'started';
++  return 'new';
++}
++
++function levelByQuestions(qn){
++  if(qn>=35)return 'Avançado';
++  if(qn>=25)return 'Intermediário';
++  return 'Essencial';
++}
++
+ /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    NAVIGATION — smooth transitions
+ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+ let currentPage='home';
+ function nav(to,data){
+   if(to===currentPage&&to==='home'){renderHome();return;}
    const from=$('pg-'+currentPage);
    const toEl=$('pg-'+to);
    if(from){from.classList.add('exit');setTimeout(()=>from.classList.remove('active','exit'),320);}
@@ -361,13 +600,44 @@ index a32656c201b2146e54b925d85a531d2af2a787a6..bf018cc29638041b866399b6e5119cec
  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
  function renderHome(){
    syncPts();
-   $('h-done').textContent=Object.keys(saved).length;
+-  $('h-done').textContent=Object.keys(saved).length;
++
++  const totalMods=MODS.length;
++  const totalDone=Object.values(saved).filter(v=>(v.pct||0)>=100).length;
++  const totalQuestions=MODS.reduce((t,m)=>t+m.qs.length,0);
++  const completion=Math.round((totalDone/totalMods)*100)||0;
++
++  $('h-total').textContent=totalMods;
++  $('h-ex').textContent=totalQuestions;
++  $('h-done').textContent=totalDone;
++  $('h-rate').textContent=`${completion}%`;
++
++  const base=MODS.map((m,idx)=>{
++    const sv=saved[m.id]||{};
++    const pct=sv.pct??0;
++    return {...m,__idx:idx,__pct:pct,__status:moduleStatus(pct)};
++  });
++
++  let items=base.filter(m=> homeFilter==='all' ? true : m.__status===homeFilter);
++
++  if(homeSort==='progress') items.sort((a,b)=>b.__pct-a.__pct||a.__idx-b.__idx);
++  if(homeSort==='questions') items.sort((a,b)=>b.qs.length-a.qs.length||a.__idx-b.__idx);
++  if(homeSort==='default') items.sort((a,b)=>a.__idx-b.__idx);
++
    const grid=$('mods-grid');
    grid.innerHTML='';
-   MODS.forEach(m=>{
+-  MODS.forEach(m=>{
++
++  if(!items.length){
++    grid.innerHTML=`<div class="mod-card" style="grid-column:1/-1;cursor:default"><div class="mod-info"><div class="mod-title">Nenhum módulo aqui ainda</div><div class="mod-sub">Troque o filtro para ver outros módulos.</div></div></div>`;
++    return;
++  }
++
++  items.forEach(m=>{
      const sv=saved[m.id]||{};
      const pct=sv.pct??0;
-     const circ=2*Math.PI*24; // r=24
+-    const circ=2*Math.PI*24; // r=24
++    const circ=2*Math.PI*24;
      const offset=circ*(1-pct/100);
  
 -    const card=document.createElement('div');
@@ -378,6 +648,8 @@ index a32656c201b2146e54b925d85a531d2af2a787a6..bf018cc29638041b866399b6e5119cec
 +    card.setAttribute('aria-label',`Abrir módulo ${m.title}`);
      card.onclick=()=>nav('quiz',m.id);
  
++    const level=levelByQuestions(m.qs.length);
++
      card.innerHTML=`
        <div class="mod-ring-wrap">
          <svg class="ring-svg" width="56" height="56" viewBox="0 0 56 56">
@@ -394,14 +666,60 @@ index a32656c201b2146e54b925d85a531d2af2a787a6..bf018cc29638041b866399b6e5119cec
          <div class="mod-sub">${m.sub}</div>
          <div class="mod-meta">
            <span class="mod-badge">${m.qs.length} questões</span>
++          <span class="mod-level">${level}</span>
            <span class="mod-pct">${sv.pct!=null?`${sv.pct}% concluído`:'Não iniciado'}</span>
          </div>
        </div>
      `;
++
      grid.appendChild(card);
-     // Animate ring in
+-    // Animate ring in
      requestAnimationFrame(()=>{
-@@ -792,51 +833,51 @@ function renderQ(){
+       const fg=card.querySelector('.ring-fg');
+       fg.style.strokeDasharray=circ;
+       fg.style.strokeDashoffset=circ;
+       requestAnimationFrame(()=>{ fg.style.strokeDashoffset=offset; });
+     });
+   });
+ }
+ 
++function startNextModule(){
++  const next=MODS.find(m=>!(saved[m.id]?.pct>=100))||MODS[0];
++  nav('quiz',next.id);
++}
++
++function scrollToModules(){
++  const area=$('pg-home');
++  const top=$('mods-toolbar').offsetTop-12;
++  area.scrollTo({top,behavior:'smooth'});
++}
++
+ /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    QUIZ ENGINE
+ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+ let Q={mod:null,qs:[],idx:0,score:0,answered:false};
+ 
+ function startMod(mid){
+   const m=MODS.find(x=>x.id===mid);
+   Q.mod=m; Q.qs=shuffle([...m.qs]); Q.idx=0; Q.score=0; Q.answered=false;
+   $('qz-name').textContent=`${m.emoji} ${m.title}`;
+   renderDots();
+   renderQ();
+ }
+ 
+ function renderDots(){
+   const wrap=$('qz-dots');
+   wrap.innerHTML='';
+   Q.qs.forEach((_,i)=>{
+     const d=document.createElement('div');
+     d.className='qdot'+(i===Q.idx?' current':i<Q.idx?' done':'');
+     wrap.appendChild(d);
+   });
+ }
+ 
+ function renderQ(){
+   const q=Q.qs[Q.idx];
+@@ -792,51 +904,51 @@ function renderQ(){
  
    // Scroll question area to top
    $('qz-scroll').scrollTop=0;
@@ -454,7 +772,7 @@ index a32656c201b2146e54b925d85a531d2af2a787a6..bf018cc29638041b866399b6e5119cec
    allOpts.forEach(b=>{
      b.disabled=true;
      if(b.dataset.v===correct){
-@@ -963,29 +1004,43 @@ function launchConf(){
+@@ -963,29 +1075,56 @@ function launchConf(){
  function animC(){
    cx.clearRect(0,0,CV.width,CV.height);
    pieces=pieces.filter(p=>p.life>0);
@@ -489,9 +807,22 @@ index a32656c201b2146e54b925d85a531d2af2a787a6..bf018cc29638041b866399b6e5119cec
 +});
 +
 +document.addEventListener('keydown',e=>{
-+  if(e.target && ['INPUT','TEXTAREA'].includes(e.target.tagName))return;
++  if(e.target && ['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName))return;
 +  if((e.key||'').toLowerCase()==='t')toggleTheme();
 +  if((e.key||'').toLowerCase()==='h')nav('home');
++});
++
++$('mods-toolbar').addEventListener('click',e=>{
++  const btn=e.target.closest('[data-filter]');
++  if(!btn)return;
++  homeFilter=btn.dataset.filter;
++  document.querySelectorAll('#mods-toolbar .chip-btn').forEach(b=>b.classList.toggle('active',b===btn));
++  renderHome();
++});
++
++$('sort-select').addEventListener('change',e=>{
++  homeSort=e.target.value;
++  renderHome();
 +});
 +
  renderHome();
