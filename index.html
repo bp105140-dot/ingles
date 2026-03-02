@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EnglishQuest Pro | Mastering English</title>
+    <title>EnglishQuest Pro | Aprenda Inglês</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=Outfit:wght@500;700;900&display=swap" rel="stylesheet">
     <style>
+        /* =====================================================
+           VARIAVEIS - LIGHT & DARK MODE
+           ===================================================== */
         :root {
-            /* Palette Pro - Tons mais saturados e profissionais */
             --brand-primary: #6366F1;
             --brand-secondary: #EC4899;
             --success: #22C55E;
@@ -30,11 +32,11 @@
         }
 
         [data-theme="dark"] {
-            --bg-main: #020617;
-            --bg-card: #1E293B;
+            --bg-main: #0F1117;
+            --bg-card: #1A1D2A;
             --text-main: #F8FAFC;
             --text-muted: #94A3B8;
-            --border-color: #334155;
+            --border-color: #2E3250;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -45,13 +47,17 @@
             color: var(--text-main);
             line-height: 1.6;
             transition: var(--transition);
+            min-height: 100vh;
         }
 
-        /* --- Header Pro --- */
+        /* =====================================================
+           HEADER PRO
+           ===================================================== */
         .app-header {
             position: sticky; top: 0; z-index: 100;
-            background: rgba(var(--bg-card), 0.8);
+            background: rgba(var(--bg-main), 0.8);
             backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border-color);
             padding: 0.75rem 1.5rem;
             display: flex; justify-content: space-between; align-items: center;
@@ -60,16 +66,41 @@
         .logo {
             font-family: 'Outfit', sans-serif;
             font-size: 1.5rem; font-weight: 900;
-            background: linear-gradient(to right, var(--brand-primary), var(--brand-secondary));
+            background: linear-gradient(135deg, var(--brand-primary), var(--brand-secondary));
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            cursor: pointer;
         }
 
-        /* --- Grid de Módulos --- */
-        .container { max-width: 1100px; margin: 2rem auto; padding: 0 1rem; }
+        .stats-pill {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            display: flex; align-items: center; gap: 0.5rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .theme-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; font-size: 1.2rem;
+            transition: var(--transition);
+        }
+        .theme-btn:hover { transform: scale(1.05); }
+
+        /* =====================================================
+           LAYOUT & GRIDS
+           ===================================================== */
+        .container { max-width: 1100px; margin: 2rem auto; padding: 0 1.5rem; }
 
         .module-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 1.5rem;
         }
 
@@ -77,69 +108,98 @@
             background: var(--bg-card);
             border-radius: var(--radius-lg);
             border: 1px solid var(--border-color);
-            padding: 1.5rem;
-            cursor: pointer;
+            padding: 1.5rem; cursor: pointer;
             transition: var(--transition);
-            position: relative;
-            overflow: hidden;
+            position: relative; overflow: hidden;
+            border-top: 5px solid var(--mod-color, var(--brand-primary));
         }
 
         .module-card:hover {
             transform: translateY(-5px);
             box-shadow: var(--shadow-md);
-            border-color: var(--brand-primary);
         }
 
         .progress-circle {
-            width: 45px; height: 45px;
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
             font-size: 0.75rem; font-weight: bold;
             background: var(--bg-main);
-            border: 3px solid var(--border-color);
+            border: 2px solid var(--border-color);
+            color: var(--text-muted);
         }
 
-        /* --- Quiz Interface --- */
+        /* =====================================================
+           QUIZ INTERFACE
+           ===================================================== */
         .quiz-container {
             max-width: 700px; margin: 2rem auto;
             background: var(--bg-card);
             border-radius: var(--radius-lg);
             padding: 2.5rem;
             box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
         }
 
+        .progress-bar {
+            height: 6px; background: var(--border-color);
+            border-radius: 10px; overflow: hidden; margin-bottom: 2rem;
+        }
+        .progress-fill {
+            height: 100%; background: var(--brand-primary);
+            transition: width 0.4s ease;
+        }
+
+        /* Botoes Multipla Escolha */
         .option-btn {
-            width: 100%;
-            padding: 1rem 1.5rem;
-            margin-bottom: 0.75rem;
+            width: 100%; padding: 1rem 1.5rem; margin-bottom: 0.75rem;
             border: 2px solid var(--border-color);
-            border-radius: var(--radius-md);
-            background: transparent;
-            color: var(--text-main);
-            font-size: 1rem; font-weight: 600;
-            text-align: left; cursor: pointer;
-            transition: var(--transition);
+            border-radius: var(--radius-md); background: var(--bg-main);
+            color: var(--text-main); font-size: 1rem; font-weight: 600;
+            text-align: left; cursor: pointer; transition: var(--transition);
             display: flex; align-items: center; gap: 1rem;
         }
-
         .option-btn:hover:not(:disabled) {
             border-color: var(--brand-primary);
             background: rgba(99, 102, 241, 0.05);
+            transform: translateX(4px);
         }
+        .option-btn.correct { background: #D4EDDA; color: #155724; border-color: #28A745; }
+        .option-btn.wrong { background: #F8D7DA; color: #721C24; border-color: #DC3545; }
+        [data-theme="dark"] .option-btn.correct { background:#1A3D28; border-color:#2EA043; color:#7EE89B; }
+        [data-theme="dark"] .option-btn.wrong { background:#3D1A1E; border-color:#C0392B; color:#FF9090; }
 
-        .option-btn.correct { background: var(--success); color: white; border-color: var(--success); }
-        .option-btn.wrong { background: var(--error); color: white; border-color: var(--error); }
+        .opt-letter {
+            background: var(--border-color); color: var(--text-muted);
+            border-radius: 6px; padding: 0.2rem 0.6rem; font-size: 0.8rem; font-weight: 800;
+        }
+        .option-btn.correct .opt-letter { background: #28A745; color: white; }
+        .option-btn.wrong .opt-letter { background: #DC3545; color: white; }
 
-        /* --- Utilitários --- */
-        .hidden { display: none !important; }
+        /* Campos de Preenchimento (Fill) */
+        .fill-input {
+            width: 100%; padding: 1.2rem; font-size: 1.2rem;
+            border: 2px solid var(--border-color); border-radius: var(--radius-md);
+            background: var(--bg-main); color: var(--text-main);
+            font-family: inherit; font-weight: 600; outline: none; transition: var(--transition);
+            margin-bottom: 1rem;
+        }
+        .fill-input:focus { border-color: var(--brand-primary); }
+        .fill-input.correct { border-color: #28A745; background: #D4EDDA; color: #155724; }
+        .fill-input.wrong { border-color: #DC3545; background: #F8D7DA; color: #721C24; }
+        [data-theme="dark"] .fill-input.correct { background:#1A3D28; color:#7EE89B; }
+        [data-theme="dark"] .fill-input.wrong { background:#3D1A1E; color:#FF9090; }
+
+        /* Botoes de Acao */
         .btn-primary {
-            background: var(--brand-primary);
-            color: white; border: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: var(--radius-md);
-            font-weight: 700; cursor: pointer;
+            background: var(--brand-primary); color: white;
+            border: none; padding: 1rem 2rem; border-radius: var(--radius-md);
+            font-weight: 800; font-size: 1rem; cursor: pointer; transition: var(--transition);
+            font-family: inherit; width: 100%;
         }
+        .btn-primary:hover:not(:disabled) { filter: brightness(1.1); transform: translateY(-2px); }
+        .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
 
+        .hidden { display: none !important; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         .animate-fade { animation: fadeIn 0.4s ease forwards; }
 
@@ -148,12 +208,14 @@
 <body>
 
     <header class="app-header">
-        <div class="logo">ENGLISHQUEST <span style="font-size: 0.8rem; vertical-align: middle;">PRO</span></div>
-        <div style="display: flex; gap: 1rem; align-items: center;">
-            <div id="user-stats" class="btn-primary" style="background: var(--bg-card); color: var(--text-main); border: 1px solid var(--border-color)">
-                🔥 <span id="streak-count">0</span> pts
+        <div class="logo" onclick="App.renderHome()">
+            🚀 EnglishQuest <span style="font-size: 0.8rem; color: var(--text-muted);">PRO</span>
+        </div>
+        <div style="display: flex; gap: 0.8rem; align-items: center;">
+            <div class="stats-pill">
+                <span style="color: var(--warning)">⭐</span> <span id="global-score">0</span> pts
             </div>
-            <button onclick="App.toggleTheme()" class="btn-primary" style="border-radius: 50%; width: 40px; height: 40px; padding: 0;">🌓</button>
+            <button onclick="App.toggleTheme()" class="theme-btn" id="theme-btn">🌙</button>
         </div>
     </header>
 
@@ -161,170 +223,327 @@
         </main>
 
     <script>
-        /**
-         * ENGINE DO APLICATIVO
-         * Organizado em um objeto Singleton para evitar poluição do escopo global
-         */
+        /* ======================================================  
+           FUNÇÕES AUXILIARES E DADOS ORIGINAIS 
+           ====================================================== */
+        function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=0|Math.random()*(i+1);[b[i],b[j]]=[b[j],b[i]];}return b;}
+        function pick(a,n){return shuffle(a).slice(0,n);}
+        function norm(s){return s.toLowerCase().replace(/[?!.,]/g,'').replace(/\s+/g,' ').trim();}
+        function esc(s){return s.replace(/'/g,"&#39;").replace(/"/g,"&quot;");}
+        const LETS=['A','B','C','D','E','F'];
+
+        // SEUS DADOS INTACTOS (100% DAS QUESTÕES)
+        const MODS=[
+          {id:'mod1',title:'Verbo To Be',sub:'AM / IS / ARE',emoji:'🌱',color:'#6BCB77',
+           qs:(()=>{const p=[['I ___ happy.','am'],['She ___ my friend.','is'],['They ___ at home.','are'],['He ___ tired today.','is'],['We ___ ready.','are'],['It ___ very cold.','is'],['You ___ my teacher.','are'],['I ___ late.','am'],['She ___ from Brazil.','is'],['They ___ students.','are'],['He ___ my brother.','is'],['We ___ busy now.','are'],['It ___ easy.','is'],['You ___ correct.','are'],['I ___ hungry.','am'],['She ___ angry.','is'],['They ___ here.','are'],['He ___ tall.','is'],['We ___ friends.','are'],['It ___ broken.','is'],['You ___ welcome.','are'],['I ___ nervous.','am'],['She ___ famous.','is'],['They ___ excited.','are'],['He ___ sick today.','is'],['We ___ late again.','are'],['It ___ important.','is'],['You ___ very kind.','are'],['I ___ fine.','am'],['They ___ ready now.','are']];return p.map(([q,a])=>({q,type:'mc',opts:['am','is','are'],ans:a}));})()},
+          {id:'mod2',title:'Sujeitos',sub:'I / YOU / HE / SHE / IT / WE / THEY',emoji:'👥',color:'#4ECDC4',
+           qs:[{q:'___ love animals. (eu)',type:'mc',opts:['You','I','They'],ans:'I'},{q:'___ is my best friend. (ele)',type:'mc',opts:['I','He','They'],ans:'He'},{q:'___ are at school now. (nós)',type:'mc',opts:['She','He','We'],ans:'We'},{q:'___ like pizza. (eles)',type:'mc',opts:['He','They','I'],ans:'They'},{q:'___ am very tired. (eu)',type:'mc',opts:['He','She','I'],ans:'I'},{q:'___ is very beautiful. (ela)',type:'mc',opts:['They','She','We'],ans:'She'},{q:'___ are my parents. (eles)',type:'mc',opts:['He','They','I'],ans:'They'},{q:'___ is cold today. (isso)',type:'mc',opts:['It','He','They'],ans:'It'},{q:'___ are my friends. (vocês)',type:'mc',opts:['He','You','It'],ans:'You'},{q:'___ love this movie. (nós)',type:'mc',opts:['She','He','We'],ans:'We'},{q:'___ is my teacher. (ela)',type:'mc',opts:['They','She','I'],ans:'She'},{q:'___ am hungry. (eu)',type:'mc',opts:['He','She','I'],ans:'I'},{q:'___ are very happy. (eles)',type:'mc',opts:['It','He','They'],ans:'They'},{q:'___ is my phone. (isso)',type:'mc',opts:['It','She','They'],ans:'It'},{q:'___ like to travel. (vocês)',type:'mc',opts:['He','You','It'],ans:'You'},{q:'___ is my brother. (ele)',type:'mc',opts:['They','He','We'],ans:'He'},{q:'___ are late again. (nós)',type:'mc',opts:['He','It','We'],ans:'We'},{q:'___ love chocolate. (elas)',type:'mc',opts:['She','They','I'],ans:'They'},{q:'___ is very important. (isso)',type:'mc',opts:['He','They','It'],ans:'It'},{q:'___ are ready now. (vocês)',type:'mc',opts:['She','You','It'],ans:'You'},{q:'___ am your student. (eu)',type:'mc',opts:['He','They','I'],ans:'I'},{q:'___ is my sister. (ela)',type:'mc',opts:['It','She','We'],ans:'She'},{q:'___ are my cousins. (eles)',type:'mc',opts:['He','They','I'],ans:'They'},{q:'___ like this song. (nós)',type:'mc',opts:['She','He','We'],ans:'We'},{q:'___ is very old. (isso)',type:'mc',opts:['He','She','It'],ans:'It'},{q:'___ are from Brazil. (eles)',type:'mc',opts:['It','He','They'],ans:'They'},{q:'___ am your friend. (eu)',type:'mc',opts:['She','He','I'],ans:'I'},{q:'___ is very smart. (ele)',type:'mc',opts:['They','He','We'],ans:'He'},{q:'___ are my classmates. (nós)',type:'mc',opts:['He','It','We'],ans:'We'},{q:'___ like English. (vocês)',type:'mc',opts:['He','It','You'],ans:'You'}]},
+          {id:'mod3',title:'Sujeito + To Be',sub:'Combinação correta',emoji:'🔗',color:'#FF6B6B',
+           qs:(()=>{const d=[['___ ___ happy. (eu estou feliz)','I am',['I is','I are']],['___ ___ my friend. (ela)','She is',['She are','She am']],['___ ___ at home. (eles)','They are',['They is','They am']],['___ ___ tired today. (ele)','He is',['He are','He am']],['___ ___ ready now. (nós)','We are',['We is','We am']],['___ ___ very cold. (isso)','It is',['It are','It am']],['___ ___ my teacher. (você)','You are',['You is','You am']],['___ ___ late again. (eu)','I am',['I is','I are']],['___ ___ from Brazil. (ela)','She is',['She are','She am']],['___ ___ students. (eles)','They are',['They is','They am']],['___ ___ my brother. (ele)','He is',['He are','He am']],['___ ___ busy today. (nós)','We are',['We is','We am']],['___ ___ easy. (isso)','It is',['It are','It am']],['___ ___ correct. (você)','You are',['You is','You am']],['___ ___ hungry now. (eu)','I am',['I is','I are']],['___ ___ angry. (ela)','She is',['She are','She am']],['___ ___ here. (eles)','They are',['They is','They am']],['___ ___ tall. (ele)','He is',['He are','He am']],['___ ___ friends. (nós)','We are',['We is','We am']],['___ ___ broken. (isso)','It is',['It are','It am']],['___ ___ welcome. (vocês)','You are',['You is','You am']],['___ ___ nervous. (eu)','I am',['I is','I are']],['___ ___ famous. (ela)','She is',['She are','She am']],['___ ___ excited. (eles)','They are',['They is','They am']],['___ ___ sick today. (ele)','He is',['He are','He am']],['___ ___ late again. (nós)','We are',['We is','We am']],['___ ___ important. (isso)','It is',['It are','It am']],['___ ___ very kind. (você)','You are',['You is','You am']],['___ ___ fine. (eu)','I am',['I is','I are']],['___ ___ ready now. (eles)','They are',['They is','They am']]];return d.map(([q,a,wr])=>({q,type:'mc',opts:shuffle([a,...wr]),ans:a}));})()},
+          {id:'mod4',title:'WH Words',sub:'What / Where / When / Why / Who / How',emoji:'❓',color:'#C77DFF',
+           qs:(()=>{const whs=['What','Where','When','Why','Who','How'];const d=[['___ is your name? (nome)','What'],['___ are you from? (lugar)','Where'],['___ old are you? (idade)','How'],['___ is your birthday? (data)','When'],['___ is your favorite color? (coisa)','What'],['___ are you sad? (motivo)','Why'],['___ is that man? (pessoa)','Who'],['___ do you live? (lugar)','Where'],['___ do you study English? (motivo)','Why'],['___ is your best friend? (pessoa)','Who'],['___ do you go to school? (tempo)','When'],['___ is your favorite food? (coisa)','What'],['___ do you work? (lugar)','Where'],['___ are you happy today? (motivo)','Why'],['___ is your teacher? (pessoa)','Who'],['___ do you wake up? (tempo)','When'],['___ is your phone? (coisa)','What'],['___ do you travel? (maneira)','How'],['___ do you like this song? (motivo)','Why'],['___ is your brother? (pessoa)','Who'],['___ do you eat for breakfast? (coisa)','What'],['___ do you go on vacation? (tempo)','When'],['___ do you sit in class? (lugar)','Where'],['___ is your favorite movie? (coisa)','What'],['___ do you feel today? (maneira)','How'],['___ is calling you? (pessoa)','Who'],['___ do you learn English? (maneira)','How'],['___ are your keys? (lugar)','Where'],['___ do you like your job? (motivo)','Why'],['___ is your favorite singer? (pessoa)','Who']];return d.map(([q,a])=>{const wr=whs.filter(w=>w!==a);return{q,type:'mc',opts:shuffle([a,...pick(wr,3)]),ans:a};});})()},
+          {id:'mod5',title:'Auxiliares',sub:'WILL / CAN / DO / DID / WOULD',emoji:'⚙️',color:'#FF8E53',
+           qs:(()=>{const opts=['will','can','do','did','would'];const d=[['Onde você irá hoje? (futuro)','will'],['Você pode me ajudar agora? (poder)','can'],['Onde você mora? (presente)','do'],['Por que você fez isso ontem? (passado)','did'],['Onde você gostaria de morar? (RIA)','would'],['Você vai viajar amanhã? (futuro)','will'],['Você pode falar inglês? (poder)','can'],['Onde você trabalha atualmente? (presente)','do'],['O que você comeu ontem? (passado)','did'],['Você iria comigo se pudesse? (RIA)','would'],['Quando você vai chegar? (futuro)','will'],['Você pode entrar aqui? (poder)','can'],['Onde você estuda? (presente)','do'],['Por que você faltou ontem? (passado)','did'],['O que você faria nessa situação? (RIA)','would'],['Você vai ligar mais tarde? (futuro)','will'],['Você pode dirigir? (poder)','can'],['Onde você compra suas roupas? (presente)','do'],['Quando você terminou o trabalho? (passado)','did'],['Você gostaria de um café? (RIA)','would'],['Você vai sair hoje à noite? (futuro)','will'],['Você pode repetir, por favor? (poder)','can'],['Onde você aprende inglês? (presente)','do'],['Por que você disse isso? (passado)','did'],['O que você faria se tivesse mais tempo? (RIA)','would'],['Você vai estudar hoje? (futuro)','will'],['Você pode me ouvir bem? (poder)','can'],['Onde você mora agora? (presente)','do'],['O que você comprou ontem? (passado)','did'],['Você gostaria de viajar comigo? (RIA)','would']];return d.map(([q,a])=>({q,type:'mc',opts,ans:a}));})()},
+          {id:'mod6',title:'WH + To Be',sub:'Montagem de Perguntas',emoji:'🧩',color:'#74B9FF',
+           qs:(()=>{const all=['What is','Where are','Why is','When is','Who is','Why are','Where is','What are','When are','Who are'];const d=[['___ ___ your name? (qual é)','What is'],['___ ___ you from? (de onde é)','Where are'],['___ ___ she angry? (por que está)','Why is'],['___ ___ they at home? (onde estão)','Where are'],['___ ___ he tired? (por que está)','Why is'],['___ ___ your birthday? (quando é)','When is'],['___ ___ we late? (por que estamos)','Why are'],['___ ___ your boss? (quem é)','Who is'],['___ ___ you nervous? (por que está)','Why are'],['___ ___ they ready? (por que estão)','Why are'],['___ ___ it broken? (por que está)','Why is'],['___ ___ your keys? (onde estão)','Where are'],['___ ___ your brother? (quem é)','Who is'],['___ ___ you happy now? (por que está)','Why are'],['___ ___ the problem? (qual é)','What is'],['___ ___ she? (quem é)','Who is'],['___ ___ the school? (onde fica)','Where is'],['___ ___ she sad? (por que está)','Why is'],['___ ___ he? (quem é)','Who is'],['___ ___ we today? (onde estamos)','Where are']];return d.map(([q,a])=>{const wr=all.filter(c=>c!==a);return{q,type:'mc',opts:shuffle([a,...pick(wr,3)]),ans:a};});})()},
+          {id:'mod7',title:'WH + Auxiliar + Verbo',sub:'Frase completa em inglês',emoji:'💬',color:'#FFE66D',
+           qs:(()=>{const d=[['Onde você trabalha?','Where do you work?',['Why do you work?','Where did you work?','Where will you work?']],['Por que você estuda inglês?','Why do you study English?',['Where do you study?','Why did you study?','What do you study?']],['Quando você chegou ontem?','When did you arrive yesterday?',['Where did you arrive?','When do you arrive?','Why did you arrive?']],['Onde ela mora?','Where does she live?',['Why does she live?','Where did she live?','Where will she live?']],['O que você vai fazer amanhã?','What will you do tomorrow?',['Where will you do?','What did you do?','What do you do?']],['Por que eles saíram cedo?','Why did they leave early?',['When did they leave?','Why do they leave?','Where did they leave?']],['Onde nós estudamos?','Where do we study?',['Why do we study?','Where did we study?','When do we study?']],['Quando ele vai viajar?','When will he travel?',['Where will he travel?','Why will he travel?','When did he travel?']],['Por que você comprou isso?','Why did you buy this?',['What did you buy?','Why do you buy?','When did you buy?']],['Onde eles vão morar?','Where will they live?',['Why will they live?','Where do they live?','Where did they live?']],['Quem você encontrou ontem?','Who did you meet yesterday?',['When did you meet?','Where did you meet?','Who do you meet?']],['Quando você termina o trabalho?','When do you finish work?',['Why do you finish?','When did you finish?','Where do you finish?']],['Onde ele estudou?','Where did he study?',['Why did he study?','Where does he study?','When did he study?']],['Por que você vai sair cedo?','Why will you leave early?',['When will you leave?','Why did you leave?','Where will you leave?']],['Quando eles chegaram?','When did they arrive?',['Where did they arrive?','Why did they arrive?','When will they arrive?']],['Onde você compra suas roupas?','Where do you buy your clothes?',['Why do you buy?','Where did you buy?','When do you buy?']],['Por que ela estuda inglês?','Why does she study English?',['Where does she study?','Why did she study?','What does she study?']],['Quando nós vamos viajar?','When will we travel?',['Where will we travel?','Why will we travel?','When do we travel?']],['Onde você deixou isso?','Where did you leave this?',['When did you leave?','Why did you leave?','Where do you leave?']],['Por que ele comprou esse carro?','Why did he buy this car?',['When did he buy?','Where did he buy?','Why does he buy?']],['Quando você começa a trabalhar?','When do you start working?',['Where do you start?','Why do you start?','When did you start?']],['Onde eles estudam?','Where do they study?',['Why do they study?','When do they study?','Where did they study?']],['Por que você chamou ela?','Why did you call her?',['When did you call?','Where did you call?','Why do you call?']],['Quando ele terminou o curso?','When did he finish the course?',['Why did he finish?','Where did he finish?','When does he finish?']],['Onde vocês moram agora?','Where do you live now?',['Why do you live here?','Where did you live?','When do you live?']],['Por que eles escolheram isso?','Why did they choose this?',['What did they choose?','When did they choose?','Why do they choose?']],['Quando você aprende inglês?','When do you learn English?',['Where do you learn?','Why do you learn?','When did you learn?']],['Onde ele trabalha agora?','Where does he work now?',['Why does he work?','Where did he work?','When does he work?']],['Por que você mudou de ideia?','Why did you change your mind?',['When did you change?','Where did you change?','Why do you change?']],['Quando eles vão chegar?','When will they arrive?',['Where will they arrive?','Why will they arrive?','When did they arrive?']]];return d.map(([q,a,wr])=>({q,type:'mc',opts:shuffle([a,...wr]),ans:a}));})()},
+          {id:'mod8',title:'PTB no Passado',sub:'WAS / WERE — Traduza para inglês',emoji:'⏪',color:'#FF6B8A',
+           qs:(()=>{const d=[['Onde eu estava ontem?','Where was I yesterday?'],['Eu estava cansado depois da aula?','Was I tired after class?'],['Onde nós estávamos na sexta-feira?','Where were we on Friday?'],['Nós estávamos prontos para a prova?','Were we ready for the test?'],['Onde você estava ontem à noite?','Where were you last night?'],['Você estava em casa de manhã?','Were you at home in the morning?'],['Ela estava feliz com o resultado?','Was she happy with the result?'],['Onde ela estava no fim de semana?','Where was she on the weekend?'],['Ele estava atrasado para o trabalho?','Was he late for work?'],['Por que ele estava nervoso?','Why was he nervous?'],['Onde nós estávamos ontem à noite?','Where were we last night?'],['Nós estávamos no lugar certo?','Were we in the right place?'],['Onde eles estavam ontem?','Where were they yesterday?'],['Eles estavam na festa?','Were they at the party?'],['Onde eu estava quando a aula começou?','Where was I when class started?'],['Eu estava errado?','Was I wrong?'],['Como foi o filme?','How was the movie?'],['O filme era interessante?','Was the movie interesting?'],['Onde nós estávamos quando choveu?','Where were we when it rained?'],['Por que nós estávamos tão cansados?','Why were we so tired?'],['Onde você estava de manhã?','Where were you in the morning?'],['Você estava animado com a viagem?','Were you excited about the trip?'],['Quem estava com ela na festa?','Who was with her at the party?'],['Ela estava sozinha em casa?','Was she alone at home?'],['Onde eu estava na sexta-feira à noite?','Where was I on Friday night?'],['Eu estava com medo?','Was I scared?'],['Onde eles estavam durante a aula?','Where were they during class?'],['Eles estavam prestando atenção?','Were they paying attention?'],['Quando nós estávamos em casa?','When were we at home?'],['Nós estávamos assistindo TV?','Were we watching TV?'],['Onde ele estava ontem à tarde?','Where was he yesterday afternoon?'],['Ele estava doente ontem?','Was he sick yesterday?'],['Onde eu estava quando você ligou?','Where was I when you called?'],['Eu estava ocupado?','Was I busy?'],['Onde estavam os alunos?','Where were the students?'],['Os alunos estavam prontos para o teste?','Were the students ready for the test?'],['Onde nós estávamos no ano passado?','Where were we last year?'],['Nós estávamos felizes com a notícia?','Were we happy with the news?'],['Onde você estava no fim de semana?','Where were you on the weekend?'],['Você estava cansado ontem?','Were you tired yesterday?'],['Por que ela estava triste?','Why was she sad?'],['Ela estava preocupada com o resultado?','Was she worried about the result?'],['Onde eu estava antes da aula?','Where was I before class?'],['Eu estava atrasado?','Was I late?'],['Onde eles estavam à noite?','Where were they at night?'],['Eles estavam com os amigos?','Were they with their friends?'],['Onde nós estávamos quando tudo começou?','Where were we when everything started?'],['Nós estávamos preparados?','Were we prepared?'],['Onde ele estava ontem à noite?','Where was he last night?'],['Ele estava no trabalho ontem?','Was he at work yesterday?']];return d.map(([q,a])=>({q,type:'fill',ans:a}));})()},
+          {id:'mod9',title:'How Many / Much / Long / Often',sub:'Quantidade & Frequência',emoji:'🔢',color:'#95E77E',
+           qs:(()=>{const opts=['How many','How much','How long','How often'];const d=[['Quantas pessoas estão aqui?','How many'],['Quanto dinheiro você tem?','How much'],['Quanto tempo dura o filme?','How long'],['Com que frequência você estuda inglês?','How often'],['Quantos alunos estão na sala?','How many'],['Quanta água tem na garrafa?','How much'],['Quanto tempo dura a aula?','How long'],['Com que frequência você pode vir aqui?','How often'],['Quantos carros estão no estacionamento?','How many'],['Quanto tempo nós temos?','How long'],['Quanto tempo a viagem vai levar?','How long'],['Com que frequência você vai viajar?','How often'],['Quantos dias o curso vai durar?','How many'],['Quanto dinheiro você vai gastar?','How much'],['Quanto tempo vai levar para terminar?','How long'],['Quantos livros você comprou?','How many'],['Quanto café você bebeu?','How much'],['Quanto tempo durou a reunião?','How long'],['Com que frequência você foi lá?','How often'],['Quantas pessoas ela convidou?','How many'],['Quanta ajuda você pode me dar?','How much'],['Quanto tempo você pode ficar aqui?','How long'],['Com que frequência nós podemos nos encontrar?','How often'],['Quantas perguntas você pode responder?','How many'],['Quanta água eu posso beber?','How much'],['Quantos alunos viriam?','How many'],['Quanto dinheiro você precisaria?','How much'],['Quanto tempo a viagem seria?','How long'],['Com que frequência você os visitaria?','How often'],['Quantos dias isso levaria?','How many'],['Quanto tempo você trabalha por dia?','How long'],['Com que frequência ela te liga?','How often'],['Quantas horas você dorme?','How many'],['Quanto açúcar você quer?','How much'],['Quanto tempo dura o jogo?','How long'],['Com que frequência são as aulas?','How often'],['Quantas pessoas você conhece aqui?','How many'],['Quanta lição de casa você tem?','How much'],['Quanto tempo é o intervalo?','How long'],['Com que frequência você pode estudar à noite?','How often'],['Quantos e-mails você enviou ontem?','How many'],['Quanto tempo você passou lá?','How long'],['Quanto tempo levou para cozinhar arroz?','How long'],['Com que frequência ele te ligou no mês passado?','How often'],['Quantos filmes você assistiu?','How many'],['Quanto dinheiro ela economizaria?','How much'],['Quanto tempo você esperaria na fila?','How long'],['Com que frequência eles vão treinar?','How often'],['Quantos dias nós vamos ficar?','How many'],['Quanta água nós podemos comprar?','How much']];return d.map(([q,a])=>({q,type:'mc',opts,ans:a}));})()},
+        ];
+
+        /* ======================================================  
+           ENGINE DO APLICATIVO (CLEAN CODE)
+           ====================================================== */
         const App = {
             state: {
                 currentModule: null,
+                qs: [],
                 currentQuestionIndex: 0,
                 score: 0,
+                isAnswered: false,
                 history: JSON.parse(localStorage.getItem('eq_pro_data') || '{}')
             },
 
             init() {
+                this.applyThemeInit();
                 this.renderHome();
                 this.updateGlobalStats();
             },
 
-            // --- Lógica de Renderização ---
+            // --- Home & Módulos ---
             renderHome() {
+                window.scrollTo(0,0);
                 const container = document.getElementById('app-content');
+                
+                const doneCount = Object.keys(this.state.history).length;
+
                 container.innerHTML = `
-                    <div class="animate-fade">
-                        <h2 style="margin-bottom: 2rem; font-family: 'Outfit'">Explore seus Módulos</h2>
-                        <div class="module-grid" id="module-list"></div>
+                    <div class="animate-fade" style="text-align: center; margin-bottom: 3rem; margin-top: 1rem;">
+                        <span style="font-size: 4rem; display: block; animation: float 3s ease-in-out infinite;">🎓</span>
+                        <h1 style="font-family: 'Outfit'; font-size: 2.5rem; margin-bottom: 0.5rem;">Trilha de Fluência</h1>
+                        <p style="color: var(--text-muted); font-weight: 600;">Selecione um módulo e teste seus conhecimentos</p>
+                        <div style="margin-top: 1rem; display: inline-block; background: var(--bg-card); border: 1px solid var(--border-color); padding: 0.5rem 1rem; border-radius: 50px; font-size: 0.9rem; font-weight: 800;">
+                            ✅ ${doneCount} de ${MODS.length} completos
+                        </div>
                     </div>
+                    <div class="module-grid" id="module-list"></div>
                 `;
 
                 const list = document.getElementById('module-list');
-                // MODS viria de um arquivo JSON separado ou API
                 MODS.forEach(mod => {
-                    const stats = this.state.history[mod.id] || { pct: 0 };
+                    const stats = this.state.history[mod.id] || null;
+                    const pctText = stats ? `${stats.pct}%` : 'Iniciar';
+                    
                     const card = document.createElement('div');
-                    card.className = 'module-card';
+                    card.className = 'module-card animate-fade';
+                    card.style.setProperty('--mod-color', mod.color);
                     card.onclick = () => this.startModule(mod.id);
                     card.innerHTML = `
                         <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
-                            <span style="font-size: 2rem;">${mod.emoji}</span>
-                            <div class="progress-circle" style="border-color: ${stats.pct > 0 ? 'var(--brand-primary)' : 'var(--border-color)'}">
-                                ${stats.pct}%
+                            <span style="font-size: 2.5rem;">${mod.emoji}</span>
+                            <div class="progress-circle" style="border-color: ${stats && stats.pct > 50 ? mod.color : 'var(--border-color)'}">
+                                ${pctText}
                             </div>
                         </div>
-                        <h3 style="font-family: 'Outfit'">${mod.title}</h3>
-                        <p style="color: var(--text-muted); font-size: 0.9rem;">${mod.sub}</p>
+                        <h3 style="font-family: 'Outfit'; font-size: 1.2rem; margin-bottom: 0.2rem;">${mod.title}</h3>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">${mod.sub}</p>
+                        <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-main); display: flex; align-items: center; gap: 0.5rem;">
+                            <span>📝 ${mod.qs.length} questões</span>
+                            ${stats ? `<span style="color: var(--text-muted)">• Melhor: ${stats.score}/${stats.total}</span>` : ''}
+                        </div>
                     `;
                     list.appendChild(card);
                 });
             },
 
+            // --- Lógica do Quiz ---
             startModule(id) {
-                this.state.currentModule = MODS.find(m => m.id === id);
+                const mod = MODS.find(m => m.id === id);
+                this.state.currentModule = mod;
+                // Embaralha as questões para que não sejam sempre na mesma ordem
+                this.state.qs = shuffle([...mod.qs]); 
                 this.state.currentQuestionIndex = 0;
                 this.state.score = 0;
                 this.renderQuestion();
             },
 
             renderQuestion() {
+                window.scrollTo(0,0);
+                this.state.isAnswered = false;
                 const mod = this.state.currentModule;
-                const q = mod.qs[this.state.currentQuestionIndex];
+                const q = this.state.qs[this.state.currentQuestionIndex];
+                const total = this.state.qs.length;
+                const progressPct = (this.state.currentQuestionIndex / total) * 100;
+                
                 const container = document.getElementById('app-content');
 
-                container.innerHTML = `
-                    <div class="quiz-container animate-fade">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
-                            <button onclick="App.renderHome()" style="background: none; border: none; cursor: pointer; color: var(--text-muted)">✕ Sair</button>
-                            <div style="font-weight: 800; font-size: 0.8rem; color: var(--brand-primary)">
-                                QUESTÃO ${this.state.currentQuestionIndex + 1} / ${mod.qs.length}
-                            </div>
-                        </div>
-                        
-                        <h2 style="font-size: 1.75rem; margin-bottom: 2rem; font-family: 'Outfit'">${q.q}</h2>
-                        
-                        <div id="options-area">
+                let interactionHTML = '';
+                
+                // Renderização condicional: Multipla Escolha ou Preenchimento
+                if (q.type === 'mc') {
+                    interactionHTML = `
+                        <div id="options-area" style="display: grid; gap: 10px; ${q.opts.length <= 3 ? 'grid-template-columns: 1fr 1fr;' : 'grid-template-columns: 1fr;'}">
                             ${q.opts.map((opt, i) => `
-                                <button class="option-btn" onclick="App.checkAnswer(this, '${opt}', '${q.ans}')">
-                                    <span style="opacity: 0.5; font-size: 0.8rem;">0${i+1}</span>
-                                    ${opt}
+                                <button class="option-btn" onclick="App.checkMC(this, '${esc(opt)}', '${esc(q.ans)}')">
+                                    <span class="opt-letter">${LETS[i]}</span>
+                                    <span>${opt}</span>
                                 </button>
                             `).join('')}
                         </div>
+                    `;
+                } else if (q.type === 'fill') {
+                    interactionHTML = `
+                        <div id="fill-area">
+                            <input type="text" id="fill-input" class="fill-input" placeholder="Digite a tradução em inglês..." autocomplete="off" spellcheck="false" onkeypress="if(event.key === 'Enter') App.checkFill()">
+                            <button id="btn-check-fill" class="btn-primary" onclick="App.checkFill()" style="background: var(--brand-secondary)">✅ Confirmar Resposta</button>
+                        </div>
+                    `;
+                }
+
+                container.innerHTML = `
+                    <div class="quiz-container animate-fade">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                            <button onclick="App.renderHome()" style="background: var(--bg-main); border: 1px solid var(--border-color); padding: 0.5rem 1rem; border-radius: var(--radius-md); cursor: pointer; color: var(--text-main); font-weight: bold; transition: var(--transition)">← Voltar</button>
+                            <div style="font-weight: 800; font-size: 0.9rem; color: var(--text-muted)">
+                                🎯 ACERTOS: <span style="color: var(--brand-primary); font-size: 1.1rem">${this.state.score}</span>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; justify-content: space-between; font-size: 0.8rem; font-weight: 700; color: var(--text-muted); margin-bottom: 0.5rem;">
+                            <span>${mod.title}</span>
+                            <span>${this.state.currentQuestionIndex + 1} DE ${total}</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: ${progressPct}%; background: ${mod.color}"></div>
+                        </div>
                         
-                        <div id="quiz-footer" class="hidden" style="margin-top: 2rem; border-top: 1px solid var(--border-color); padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center;">
-                            <span id="feedback-text"></span>
-                            <button onclick="App.nextQuestion()" class="btn-primary">Próxima →</button>
+                        <h2 style="font-size: 1.8rem; margin-bottom: 2rem; font-family: 'Outfit'; text-align: center">${q.q}</h2>
+                        
+                        ${interactionHTML}
+                        
+                        <div id="quiz-footer" class="hidden animate-fade" style="margin-top: 2rem; background: var(--bg-main); border-radius: var(--radius-md); border: 1px solid var(--border-color); padding: 1.5rem; text-align: center;">
+                            <div id="feedback-text" style="font-size: 1.1rem; margin-bottom: 1rem;"></div>
+                            <button onclick="App.nextQuestion()" class="btn-primary" style="background: var(--brand-primary)">Continuar ➔</button>
                         </div>
                     </div>
                 `;
+
+                // Dar foco automático no input se for fill
+                if (q.type === 'fill') {
+                    setTimeout(() => document.getElementById('fill-input').focus(), 100);
+                }
             },
 
-            checkAnswer(btn, chosen, correct) {
+            // Verificação Multiple Choice
+            checkMC(btn, chosen, correct) {
+                if (this.state.isAnswered) return;
+                this.state.isAnswered = true;
+
                 const isCorrect = chosen === correct;
+                
+                // Destacar botões
+                document.querySelectorAll('.option-btn').forEach(b => {
+                    b.disabled = true;
+                    // Procura o botão que tem a resposta correta para pintar de verde
+                    const btnText = b.querySelector('span:nth-child(2)').innerText;
+                    if (btnText === correct) b.classList.add('correct');
+                });
+
                 if (isCorrect) {
                     this.state.score++;
-                    btn.classList.add('correct');
-                    document.getElementById('feedback-text').innerHTML = '✨ <b>Excelente!</b>';
                 } else {
                     btn.classList.add('wrong');
-                    document.getElementById('feedback-text').innerHTML = `❌ Resposta: <b>${correct}</b>`;
                 }
 
-                // Desabilitar outros botões
-                document.querySelectorAll('.option-btn').forEach(b => b.disabled = true);
-                document.getElementById('quiz-footer').classList.remove('hidden');
+                this.showFeedback(isCorrect, correct);
+            },
+
+            // Verificação Text Input (Fill)
+            checkFill() {
+                if (this.state.isAnswered) return;
+                const inputEl = document.getElementById('fill-input');
+                const userVal = inputEl.value.trim();
+                
+                if (!userVal) return; // Não faz nada se estiver vazio
+
+                this.state.isAnswered = true;
+                inputEl.disabled = true;
+                document.getElementById('btn-check-fill').disabled = true;
+
+                const q = this.state.qs[this.state.currentQuestionIndex];
+                const isCorrect = norm(userVal) === norm(q.ans);
+
+                if (isCorrect) {
+                    this.state.score++;
+                    inputEl.classList.add('correct');
+                } else {
+                    inputEl.classList.add('wrong');
+                }
+
+                this.showFeedback(isCorrect, q.ans);
+            },
+
+            showFeedback(isCorrect, correctAnswer) {
+                const footer = document.getElementById('quiz-footer');
+                const textEl = document.getElementById('feedback-text');
+                
+                footer.classList.remove('hidden');
+                
+                if (isCorrect) {
+                    const praises = ['✨ Excelente!', '🔥 Você arrasou!', '🎯 Na mosca!', '💪 Muito bem!'];
+                    textEl.innerHTML = `<span style="color: #28A745; font-weight: 800;">${praises[Math.floor(Math.random()*praises.length)]}</span>`;
+                } else {
+                    textEl.innerHTML = `<span style="color: #DC3545; font-weight: 800;">❌ Incorreto.</span><br><span style="color: var(--text-main)">A resposta certa é: <b>${correctAnswer}</b></span>`;
+                }
             },
 
             nextQuestion() {
                 this.state.currentQuestionIndex++;
-                if (this.state.currentQuestionIndex < this.state.currentModule.qs.length) {
+                if (this.state.currentQuestionIndex < this.state.qs.length) {
                     this.renderQuestion();
                 } else {
                     this.finishModule();
                 }
             },
 
+            // --- Fim do Módulo ---
             finishModule() {
-                const total = this.state.currentModule.qs.length;
-                const pct = Math.round((this.state.score / total) * 100);
+                window.scrollTo(0,0);
+                const total = this.state.qs.length;
+                const score = this.state.score;
+                const pct = Math.round((score / total) * 100);
+                const mod = this.state.currentModule;
                 
-                // Salvar Progresso
-                this.state.history[this.state.currentModule.id] = {
-                    score: this.state.score,
-                    total: total,
-                    pct: pct
-                };
-                localStorage.setItem('eq_pro_data', JSON.stringify(this.state.history));
+                // Salvar Progresso (se for o recorde)
+                const prevStats = this.state.history[mod.id];
+                if (!prevStats || pct >= prevStats.pct) {
+                    this.state.history[mod.id] = { score, total, pct };
+                    localStorage.setItem('eq_pro_data', JSON.stringify(this.state.history));
+                }
 
                 const container = document.getElementById('app-content');
+                
+                let icon = '📚';
+                let msg = 'Continue praticando!';
+                if (pct === 100) { icon = '🏆'; msg = 'Perfeito! Nota máxima!'; }
+                else if (pct >= 80) { icon = '🎉'; msg = 'Ótimo trabalho!'; }
+                else if (pct >= 60) { icon = '😊'; msg = 'Você foi bem!'; }
+
                 container.innerHTML = `
-                    <div class="quiz-container animate-fade" style="text-align: center">
-                        <h1 style="font-size: 4rem; margin-bottom: 1rem;">${pct >= 70 ? '🎉' : '📚'}</h1>
-                        <h2 style="font-family: 'Outfit'; font-size: 2rem;">Módulo Finalizado!</h2>
-                        <p style="color: var(--text-muted); margin-bottom: 2rem;">Você acertou ${this.state.score} de ${total} questões (${pct}%)</p>
-                        <button onclick="App.renderHome()" class="btn-primary" style="width: 100%">Voltar ao Início</button>
+                    <div class="quiz-container animate-fade" style="text-align: center; max-width: 500px; padding: 4rem 2rem;">
+                        <span style="font-size: 5rem; display: block; margin-bottom: 1rem;">${icon}</span>
+                        <h2 style="font-family: 'Outfit'; font-size: 2.2rem; color: var(--text-main); margin-bottom: 0.5rem;">${msg}</h2>
+                        <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 2rem;">Módulo: <b>${mod.title}</b></p>
+                        
+                        <div style="background: var(--bg-main); border: 2px solid var(--border-color); border-radius: 50%; width: 150px; height: 150px; margin: 0 auto 2rem; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                            <span style="font-size: 2.5rem; font-family: 'Outfit'; font-weight: 900; line-height: 1;">${pct}%</span>
+                            <span style="font-size: 0.9rem; color: var(--text-muted); font-weight: 700;">${score} de ${total}</span>
+                        </div>
+
+                        <div style="display: flex; gap: 1rem; flex-direction: column;">
+                            <button onclick="App.startModule('${mod.id}')" class="btn-primary" style="background: var(--bg-main); color: var(--text-main); border: 2px solid var(--border-color);">🔄 Tentar Novamente</button>
+                            <button onclick="App.renderHome()" class="btn-primary" style="background: var(--brand-primary);">🏠 Voltar ao Início</button>
+                        </div>
                     </div>
                 `;
+                
                 this.updateGlobalStats();
             },
 
+            // --- Globais & Utilidades ---
             updateGlobalStats() {
-                const totalPts = Object.values(this.state.history).reduce((t, v) => t + v.score, 0);
-                document.getElementById('streak-count').textContent = totalPts;
+                const totalPts = Object.values(this.state.history).reduce((t, v) => t + (v.score || 0), 0);
+                document.getElementById('global-score').textContent = totalPts;
+            },
+
+            applyThemeInit() {
+                const savedTheme = localStorage.getItem('eq_pro_theme');
+                if (savedTheme === 'dark') {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    document.getElementById('theme-btn').textContent = '☀️';
+                }
             },
 
             toggleTheme() {
                 const html = document.documentElement;
                 const isDark = html.getAttribute('data-theme') === 'dark';
-                html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+                
+                if (isDark) {
+                    html.setAttribute('data-theme', 'light');
+                    localStorage.setItem('eq_pro_theme', 'light');
+                    document.getElementById('theme-btn').textContent = '🌙';
+                } else {
+                    html.setAttribute('data-theme', 'dark');
+                    localStorage.setItem('eq_pro_theme', 'dark');
+                    document.getElementById('theme-btn').textContent = '☀️';
+                }
             }
         };
 
-        // Dados simulados (Manter os seus MODS aqui)
-        const MODS = [
-            {
-                id: 'mod1', 
-                title: 'Verbo To Be', 
-                sub: 'Domine a base da comunicação', 
-                emoji: '🌱', 
-                qs: [
-                    { q: 'I ___ professional.', opts: ['am', 'is', 'are'], ans: 'am' },
-                    { q: 'Success ___ earned.', opts: ['am', 'is', 'are'], ans: 'is' }
-                ] 
-            },
-            // Adicione os outros aqui seguindo o mesmo padrão...
-        ];
-
+        // Inicializa o App ao carregar a página
         window.onload = () => App.init();
     </script>
 </body>
